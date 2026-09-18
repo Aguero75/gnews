@@ -3,382 +3,386 @@
 ================================ */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #F7F4EA;
-    color: #12372A;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 30px 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f7f4ea;
+  color: #12372a;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px;
 }
 
 img {
-    width: 100%;
-    display: block;
+  width: 100%;
+  display: block;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
-
 
 /* ================================
    HEADER
 ================================ */
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
 }
-
 
 /* LOGO */
 
 .logo {
-    font-size: 50px;
-    font-weight: bold;
-    letter-spacing: -5px;
-    color: #12372A;
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: -5px;
+  color: #12372a;
 }
-
 
 /* NAVIGATION */
 
 nav ul {
-    display: flex;
-    list-style: none;
-    gap: 35px;
+  display: flex;
+  list-style: none;
+  gap: 35px;
 }
 
 nav a {
-    color: #4F665B;
-    font-size: 15px;
-    transition: 0.3s;
+  color: #4f665b;
+  font-size: 15px;
+  transition: 0.3s;
 }
 
 nav a:hover {
-    color: #C9A227;
+  color: #c9a227;
 }
-
 
 /* ================================
    MAIN SECTION
 ================================ */
 
 main {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
 }
-
 
 /* ================================
    MAIN NEWS
 ================================ */
 
 .main-news {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
 
 /* MAIN IMAGE */
 
 .main-news > img {
-    height: 300px;
-    object-fit: cover;
+  height: 300px;
+  object-fit: cover;
 }
-
 
 /* MAIN CONTENT */
 
 .main-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 30px;
 }
-
 
 /* MAIN HEADING */
 
 .main-content h1 {
-    font-size: 50px;
-    line-height: 1;
-    font-weight: 800;
-    color: #12372A;
-}
+  font-size: 50px;
+  line-height: 1;
+  font-weight: 800;
+  color: #12372a;
 
+  /* Clamp so a long API headline can't blow up the layout */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* MAIN TEXT */
 
 .main-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .main-text p {
-    color: #4F665B;
-    font-size: 15px;
-    line-height: 1.7;
-}
+  color: #4f665b;
+  font-size: 15px;
+  line-height: 1.7;
 
+  /* Clamp the summary paragraph to a consistent length */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* ================================
    READ MORE BUTTON
 ================================ */
 
 button {
-    width: 150px;
-    padding: 15px 20px;
-    border: none;
-    background-color: #1B5E4B;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    cursor: pointer;
-    transition: 0.3s;
+  width: 150px;
+  padding: 15px 20px;
+  border: none;
+  background-color: #1b5e4b;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
-    background-color: #C9A227;
-    color: #12372A;
+  background-color: #c9a227;
+  color: #12372a;
 }
-
 
 /* ================================
    NEW SECTION
 ================================ */
 
 .new-section {
-    background-color: #12372A;
-    color: white;
-    padding: 25px 20px;
+  background-color: #12372a;
+  color: white;
+  padding: 25px 20px;
 }
-
 
 /* NEW HEADING */
 
 .new-section h2 {
-    color: #D4AF37;
-    font-size: 35px;
-    margin-bottom: 25px;
+  color: #d4af37;
+  font-size: 35px;
+  margin-bottom: 25px;
 }
-
 
 /* ARTICLES */
 
 .new-section article {
-    padding: 20px 0;
+  padding: 20px 0;
 }
 
 .new-section article:first-of-type {
-    padding-top: 0;
+  padding-top: 0;
 }
-
 
 /* ARTICLE HEADING */
 
 .new-section h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: white;
-    transition: 0.3s;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white;
+  transition: 0.3s;
+
+  /* Clamp long API headlines to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .new-section h3:hover {
-    color: #D4AF37;
-    cursor: pointer;
+  color: #d4af37;
+  cursor: pointer;
 }
-
 
 /* ARTICLE DESCRIPTION */
 
 .new-section p {
-    color: #C8D2CC;
-    font-size: 14px;
-    line-height: 1.6;
-}
+  color: #c8d2cc;
+  font-size: 14px;
+  line-height: 1.6;
 
+  /* Clamp long API descriptions to 2 lines to match the design */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* DIVIDER */
 
 .new-section hr {
-    border: none;
-    border-top: 1px solid #4F665B;
+  border: none;
+  border-top: 1px solid #4f665b;
 }
-
 
 /* ================================
    BOTTOM NEWS
 ================================ */
 
 .bottom-news {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 60px;
 }
-
 
 /* NEWS CARD */
 
 .news-card {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
 }
-
 
 /* CARD IMAGE */
 
 .news-card img {
-    height: 130px;
-    object-fit: cover;
+  height: 130px;
+  object-fit: cover;
+  background-color: #e5e0d0; /* visible placeholder tone if an image fails to load */
 }
-
 
 /* NUMBER */
 
 .news-card h2 {
-    color: #9A9F98;
-    font-size: 30px;
-    margin-bottom: 8px;
+  color: #9a9f98;
+  font-size: 30px;
+  margin-bottom: 8px;
 }
-
 
 /* CARD TITLE */
 
 .news-card h3 {
-    font-size: 17px;
-    margin-bottom: 10px;
-    color: #12372A;
-    transition: 0.3s;
+  font-size: 17px;
+  margin-bottom: 10px;
+  color: #12372a;
+  transition: 0.3s;
+
+  /* Clamp long API headlines to 2 lines so cards stay aligned */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .news-card h3:hover {
-    color: #1B5E4B;
-    cursor: pointer;
+  color: #1b5e4b;
+  cursor: pointer;
 }
-
 
 /* CARD DESCRIPTION */
 
 .news-card p {
-    color: #4F665B;
-    font-size: 13px;
-    line-height: 1.5;
-}
+  color: #4f665b;
+  font-size: 13px;
+  line-height: 1.5;
 
+  /* Clamp long API descriptions to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* ================================
    MOBILE DESIGN
 ================================ */
 
 @media (max-width: 700px) {
+  body {
+    padding: 25px 15px;
+  }
 
-    body {
-        padding: 25px 15px;
-    }
+  /* HEADER */
 
+  header {
+    margin-bottom: 35px;
+  }
 
-    /* HEADER */
+  .logo {
+    font-size: 40px;
+  }
 
-    header {
-        margin-bottom: 35px;
-    }
+  nav ul {
+    gap: 15px;
+  }
 
-    .logo {
-        font-size: 40px;
-    }
+  nav a {
+    font-size: 12px;
+  }
 
-    nav ul {
-        gap: 15px;
-    }
+  /* MAIN */
 
-    nav a {
-        font-size: 12px;
-    }
+  main {
+    grid-template-columns: 1fr;
+  }
 
-    
+  /* MAIN IMAGE */
 
+  .main-news > img {
+    height: 250px;
+  }
 
-    /* MAIN */
+  /* MAIN CONTENT */
 
-    main {
-        grid-template-columns: 1fr;
-    }
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
+  .main-content h1 {
+    font-size: 42px;
+  }
 
-    /* MAIN IMAGE */
+  .main-text {
+    gap: 25px;
+  }
 
-    .main-news > img {
-        height: 250px;
-    }
+  /* BOTTOM NEWS */
 
+  .bottom-news {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
 
-    /* MAIN CONTENT */
-
-    .main-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .main-content h1 {
-        font-size: 42px;
-    }
-
-    .main-text {
-        gap: 25px;
-    }
-
-
-    /* BOTTOM NEWS */
-
-    .bottom-news {
-        grid-template-columns: 1fr;
-        margin-top: 40px;
-    }
-
-    .news-card {
-        grid-template-columns: 100px 1fr;
-    }
+  .news-card {
+    grid-template-columns: 100px 1fr;
+  }
 }
-
 
 /* ================================
    SMALL PHONES
 ================================ */
 
 @media (max-width: 450px) {
+  .logo {
+    font-size: 35px;
+  }
 
-    .logo {
-        font-size: 35px;
-    }
+  nav ul {
+    gap: 10px;
+  }
 
-    nav ul {
-        gap: 10px;
-    }
+  nav a {
+    font-size: 11px;
+  }
 
-    nav a {
-        font-size: 11px;
-    }
+  .main-content h1 {
+    font-size: 38px;
+  }
 
-    .main-content h1 {
-        font-size: 38px;
-    }
-
-    .new-section {
-        padding: 25px 20px;
-    }
+  .new-section {
+    padding: 25px 20px;
+  }
 }

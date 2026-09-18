@@ -13,6 +13,9 @@
 // also keeps the API key out of the public page source.
 const API_URL = "/api/news";
 
+// Local fallback image shown when an article has no image or its
+// image URL fails to load (broken link, 404, hotlink block, etc.)
+const FALLBACK_IMAGE = "assets/images/placeholder.jpg";
 
 // =====================================
 // GET HTML ELEMENTS
@@ -27,150 +30,147 @@ const newSection = document.querySelector(".new-section");
 
 const newsCards = document.querySelectorAll(".news-card");
 
+// =====================================
+// HELPERS
+// =====================================
+
+// Sets an <img>'s src safely: falls back to a local placeholder when
+// the article has no image, and also falls back if the given URL
+// fails to actually load (broken link / hotlink blocked / 404).
+function setImageWithFallback(imgElement, src, alt) {
+  imgElement.src = src || FALLBACK_IMAGE;
+  imgElement.alt = alt || "News image";
+
+  imgElement.onerror = function () {
+    imgElement.onerror = null; // prevent any possible infinite loop
+    imgElement.src = FALLBACK_IMAGE;
+  };
+}
 
 // =====================================
 // FETCH NEWS
 // =====================================
 
 async function getNews() {
+  try {
+    const response = await fetch(API_URL);
 
-    try {
-
-        const response = await fetch(API_URL);
-
-        // Check if the request was successful
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        console.log("News received:", data);
-
-        // Make sure articles exist
-        if (!data.articles || data.articles.length === 0) {
-            throw new Error("No news articles found.");
-        }
-
-        displayNews(data.articles);
-
-    } catch (error) {
-
-        console.error("Could not fetch news:", error);
-
+    // Check if the request was successful
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
     }
-}
 
+    const data = await response.json();
+
+    console.log("News received:", data);
+
+    // Make sure articles exist
+    if (!data.articles || data.articles.length === 0) {
+      throw new Error("No news articles found.");
+    }
+
+    displayNews(data.articles);
+  } catch (error) {
+    console.error("Could not fetch news:", error);
+  }
+}
 
 // =====================================
 // DISPLAY NEWS
 // =====================================
 
 function displayNews(articles) {
+  // ---------------------------------
+  // MAIN NEWS
+  // ---------------------------------
 
-    // ---------------------------------
-    // MAIN NEWS
-    // ---------------------------------
+  const mainArticle = articles[0];
 
-    const mainArticle = articles[0];
+  setImageWithFallback(mainImage, mainArticle.image, mainArticle.title);
 
-    mainImage.src = mainArticle.image;
-    mainImage.alt = mainArticle.title;
+  mainTitle.textContent = mainArticle.title;
 
-    mainTitle.textContent = mainArticle.title;
+  mainDescription.textContent =
+    mainArticle.description || "Read the latest news.";
 
-    mainDescription.textContent =
-        mainArticle.description || "Read the latest news.";
+  // Open the complete article
+  readMoreButton.onclick = function () {
+    window.open(mainArticle.url, "_blank");
+  };
 
-    // Open the complete article
-    readMoreButton.onclick = function () {
-        window.open(mainArticle.url, "_blank");
-    };
+  // ---------------------------------
+  // NEW SECTION
+  // ---------------------------------
 
+  const newArticles = articles.slice(1, 4);
 
-    // ---------------------------------
-    // NEW SECTION
-    // ---------------------------------
+  const newTitle = newSection.querySelector("h2");
 
-    const newArticles = articles.slice(1, 4);
+  // Remove the old dummy articles
+  newSection.querySelectorAll("article").forEach((article) => {
+    article.remove();
+  });
 
-    const newTitle = newSection.querySelector("h2");
+  // Remove old horizontal lines
+  newSection.querySelectorAll("hr").forEach((line) => {
+    line.remove();
+  });
 
-    // Remove the old dummy articles
-    newSection.querySelectorAll("article").forEach(article => {
-        article.remove();
-    });
+  // Add the real articles
+  newArticles.forEach((article, index) => {
+    const articleElement = document.createElement("article");
 
-    // Remove old horizontal lines
-    newSection.querySelectorAll("hr").forEach(line => {
-        line.remove();
-    });
-
-
-    // Add the real articles
-    newArticles.forEach((article, index) => {
-
-        const articleElement = document.createElement("article");
-
-        articleElement.innerHTML = `
+    articleElement.innerHTML = `
             <h3>${article.title}</h3>
             <p>${article.description || "Read more about this story."}</p>
         `;
 
-        // Make article clickable
-        articleElement.addEventListener("click", function () {
-            window.open(article.url, "_blank");
-        });
-
-        newSection.appendChild(articleElement);
-
-
-        // Add divider except after the last article
-        if (index < newArticles.length - 1) {
-
-            const divider = document.createElement("hr");
-
-            newSection.appendChild(divider);
-        }
+    // Make article clickable
+    articleElement.addEventListener("click", function () {
+      window.open(article.url, "_blank");
     });
 
+    newSection.appendChild(articleElement);
 
-    // ---------------------------------
-    // BOTTOM NEWS CARDS
-    // ---------------------------------
+    // Add divider except after the last article
+    if (index < newArticles.length - 1) {
+      const divider = document.createElement("hr");
 
-    const bottomArticles = articles.slice(4, 7);
+      newSection.appendChild(divider);
+    }
+  });
 
-    bottomArticles.forEach((article, index) => {
+  // ---------------------------------
+  // BOTTOM NEWS CARDS
+  // ---------------------------------
 
-        if (!newsCards[index]) {
-            return;
-        }
+  const bottomArticles = articles.slice(4, 7);
 
-        const card = newsCards[index];
+  bottomArticles.forEach((article, index) => {
+    if (!newsCards[index]) {
+      return;
+    }
 
-        const image = card.querySelector("img");
-        const title = card.querySelector("h3");
-        const description = card.querySelector("p");
+    const card = newsCards[index];
 
-        image.src = article.image;
-        image.alt = article.title;
+    const image = card.querySelector("img");
+    const title = card.querySelector("h3");
+    const description = card.querySelector("p");
 
-        title.textContent = article.title;
+    setImageWithFallback(image, article.image, article.title);
 
-        description.textContent =
-            article.description || "Read the latest story.";
+    title.textContent = article.title;
 
+    description.textContent = article.description || "Read the latest story.";
 
-        // Make card clickable
-        card.style.cursor = "pointer";
+    // Make card clickable
+    card.style.cursor = "pointer";
 
-        card.addEventListener("click", function () {
-            window.open(article.url, "_blank");
-        });
+    card.addEventListener("click", function () {
+      window.open(article.url, "_blank");
     });
+  });
 }
-
 
 // =====================================
 // START THE WEBSITE
