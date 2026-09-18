@@ -64,6 +64,32 @@ function setImageWithFallback(imgElement, src, alt) {
   };
 }
 
+// Truncates text to a fixed character count and adds an ellipsis when
+// it was actually cut short. This is done here in JS - rather than
+// relying only on CSS line-clamp - because line-clamp clamps by line
+// count, which still varies with font rendering and word-wrap breaks.
+// A fixed character limit gives a predictable, consistent result no
+// matter how the words happen to break, so the layout can't be blown
+// up by unusually long API text again. It also trims at a word
+// boundary rather than mid-word, so text never gets cut like "Manch…".
+function truncateText(text, maxLength) {
+  if (!text) {
+    return "";
+  }
+
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  // Cut to the limit, then back up to the last full word.
+  const cut = text.slice(0, maxLength);
+  const lastSpace = cut.lastIndexOf(" ");
+
+  const trimmed = lastSpace > 0 ? cut.slice(0, lastSpace) : cut;
+
+  return trimmed.trim() + "…";
+}
+
 // =====================================
 // FETCH NEWS
 // =====================================
@@ -105,10 +131,12 @@ function displayNews(articles) {
 
   setImageWithFallback(mainImage, mainArticle.image, mainArticle.title);
 
-  mainTitle.textContent = mainArticle.title;
+  mainTitle.textContent = truncateText(mainArticle.title, 70);
 
-  mainDescription.textContent =
-    mainArticle.description || "Read the latest news.";
+  mainDescription.textContent = truncateText(
+    mainArticle.description || "Read the latest news.",
+    220,
+  );
 
   // Open the complete article
   readMoreButton.onclick = function () {
@@ -137,9 +165,15 @@ function displayNews(articles) {
   newArticles.forEach((article, index) => {
     const articleElement = document.createElement("article");
 
+    const newTitleText = truncateText(article.title, 60);
+    const newDescriptionText = truncateText(
+      article.description || "Read more about this story.",
+      90,
+    );
+
     articleElement.innerHTML = `
-            <h3>${article.title}</h3>
-            <p>${article.description || "Read more about this story."}</p>
+            <h3>${newTitleText}</h3>
+            <p>${newDescriptionText}</p>
         `;
 
     // Make article clickable
@@ -176,9 +210,12 @@ function displayNews(articles) {
 
     setImageWithFallback(image, article.image, article.title);
 
-    title.textContent = article.title;
+    title.textContent = truncateText(article.title, 55);
 
-    description.textContent = article.description || "Read the latest story.";
+    description.textContent = truncateText(
+      article.description || "Read the latest story.",
+      90,
+    );
 
     // Make card clickable
     card.style.cursor = "pointer";
