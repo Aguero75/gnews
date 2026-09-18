@@ -13,9 +13,26 @@
 // also keeps the API key out of the public page source.
 const API_URL = "/api/news";
 
-// Local fallback image shown when an article has no image or its
-// image URL fails to load (broken link, 404, hotlink block, etc.)
-const FALLBACK_IMAGE = "assets/images/placeholder.jpg";
+// Fallback image shown when an article has no image or its image URL
+// fails to load (broken link, 404, hotlink block, etc.)
+//
+// This is an inline SVG data URI rather than a file path like
+// "assets/images/placeholder.jpg" on purpose: a file path depends on
+// that file actually existing in the deployed project, and if it
+// doesn't, the fallback itself 404s and the browser just shows the
+// alt text - which is worse than doing nothing. A data URI is built
+// into the string itself, so there's no network request involved and
+// it can never fail to load.
+const FALLBACK_IMAGE =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+            <rect width="100%" height="100%" fill="#12372A"/>
+            <text x="50%" y="50%" font-family="Arial, sans-serif"
+                  font-size="28" font-weight="bold" fill="#F7F4EA"
+                  text-anchor="middle" dominant-baseline="middle">W.</text>
+        </svg>
+    `);
 
 // =====================================
 // GET HTML ELEMENTS
