@@ -1,0 +1,384 @@
+/* ================================
+   GENERAL RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F7F4EA;
+    color: #12372A;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: -5px;
+    color: #12372A;
+}
+
+
+/* NAVIGATION */
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+nav a {
+    color: #4F665B;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #C9A227;
+}
+
+
+/* ================================
+   MAIN SECTION
+================================ */
+
+main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+
+/* ================================
+   MAIN NEWS
+================================ */
+
+.main-news {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* MAIN IMAGE */
+
+.main-news > img {
+    height: 300px;
+    object-fit: cover;
+}
+
+
+/* MAIN CONTENT */
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+
+/* MAIN HEADING */
+
+.main-content h1 {
+    font-size: 50px;
+    line-height: 1;
+    font-weight: 800;
+    color: #12372A;
+}
+
+
+/* MAIN TEXT */
+
+.main-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-text p {
+    color: #4F665B;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   READ MORE BUTTON
+================================ */
+
+button {
+    width: 150px;
+    padding: 15px 20px;
+    border: none;
+    background-color: #1B5E4B;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #C9A227;
+    color: #12372A;
+}
+
+
+/* ================================
+   NEW SECTION
+================================ */
+
+.new-section {
+    background-color: #12372A;
+    color: white;
+    padding: 25px 20px;
+}
+
+
+/* NEW HEADING */
+
+.new-section h2 {
+    color: #D4AF37;
+    font-size: 35px;
+    margin-bottom: 25px;
+}
+
+
+/* ARTICLES */
+
+.new-section article {
+    padding: 20px 0;
+}
+
+.new-section article:first-of-type {
+    padding-top: 0;
+}
+
+
+/* ARTICLE HEADING */
+
+.new-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: white;
+    transition: 0.3s;
+}
+
+.new-section h3:hover {
+    color: #D4AF37;
+    cursor: pointer;
+}
+
+
+/* ARTICLE DESCRIPTION */
+
+.new-section p {
+    color: #C8D2CC;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* DIVIDER */
+
+.new-section hr {
+    border: none;
+    border-top: 1px solid #4F665B;
+}
+
+
+/* ================================
+   BOTTOM NEWS
+================================ */
+
+.bottom-news {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+
+/* NEWS CARD */
+
+.news-card {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 20px;
+}
+
+
+/* CARD IMAGE */
+
+.news-card img {
+    height: 130px;
+    object-fit: cover;
+}
+
+
+/* NUMBER */
+
+.news-card h2 {
+    color: #9A9F98;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+
+/* CARD TITLE */
+
+.news-card h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    color: #12372A;
+    transition: 0.3s;
+}
+
+.news-card h3:hover {
+    color: #1B5E4B;
+    cursor: pointer;
+}
+
+
+/* CARD DESCRIPTION */
+
+.news-card p {
+    color: #4F665B;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ================================
+   MOBILE DESIGN
+================================ */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 25px 15px;
+    }
+
+
+    /* HEADER */
+
+    header {
+        margin-bottom: 35px;
+    }
+
+    .logo {
+        font-size: 40px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    
+
+
+    /* MAIN */
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* MAIN IMAGE */
+
+    .main-news > img {
+        height: 250px;
+    }
+
+
+    /* MAIN CONTENT */
+
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .main-content h1 {
+        font-size: 42px;
+    }
+
+    .main-text {
+        gap: 25px;
+    }
+
+
+    /* BOTTOM NEWS */
+
+    .bottom-news {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
+    }
+
+    .news-card {
+        grid-template-columns: 100px 1fr;
+    }
+}
+
+
+/* ================================
+   SMALL PHONES
+================================ */
+
+@media (max-width: 450px) {
+
+    .logo {
+        font-size: 35px;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .main-content h1 {
+        font-size: 38px;
+    }
+
+    .new-section {
+        padding: 25px 20px;
+    }
+}
